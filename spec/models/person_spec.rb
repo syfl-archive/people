@@ -1,19 +1,16 @@
 RSpec.describe Person, type: :model do
   subject(:person) { Person.new }
 
-  it 'must have a first name' do
-    expect(person).not_to be_valid
-    expect(person.errors[:first_name]).to include("can't be blank")
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:first_name) }
+    it { is_expected.to validate_presence_of(:last_name) }
   end
 
-  it 'must have a last name' do
-    expect(person).not_to be_valid
-    expect(person.errors[:last_name]).to include("can't be blank")
-  end
-
-  it 'can construct a full name from first and last names' do
-    person.first_name = 'John'
-    person.last_name = 'Smith'
-    expect(person.full_name).to eq 'John Smith'
+  describe '#full_name' do
+    it 'can construct a full name from first and last names' do
+      person.first_name = 'John'
+      person.last_name = 'Smith'
+      expect(person.full_name).to eq 'John Smith'
+    end
   end
 end
