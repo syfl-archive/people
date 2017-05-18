@@ -3,6 +3,6 @@ class Person < ApplicationRecord
   validates :last_name, presence: true
 
   def full_name
-    'John Smith'
+    [first_name, middle_name, last_name].compact.join(' ')
   end
 end

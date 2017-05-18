@@ -8,10 +8,21 @@ RSpec.describe Person, type: :model do
   end
 
   describe '#full_name' do
-    it 'can construct a full name from first and last names' do
-      person.first_name = 'John'
-      person.last_name = 'Smith'
-      expect(person.full_name).to eq 'John Smith'
+    context 'when middle name is absent' do
+      it 'can construct a full name from first and last names' do
+        person.first_name = 'John'
+        person.last_name = 'Smith'
+        expect(person.full_name).to eq 'John Smith'
+      end
+    end
+
+    context 'when middle name is present' do
+      it 'can construct a full name from first and last names' do
+        person.first_name = 'John'
+        person.middle_name = 'Peter'
+        person.last_name = 'Smith'
+        expect(person.full_name).to eq 'John Peter Smith'
+      end
     end
   end
 end
